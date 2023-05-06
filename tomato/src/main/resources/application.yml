@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/tomato
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100
+  #    defer-datasource-initialization: true
+  #        use_sql_comments: true
+  data:
+    web:
+      pageable:
+        default-page-size: 100
+
+  logging.level:
+    org.hibernate.SQL: debug
+#    org.hibernate.type: trace
