@@ -23,8 +23,8 @@
             <h1>Tomato Field</h1>
             <table class="table table-bordered table-hover">
                 <tbody>
-                <tr style="height : 100px;" th:each="height, idx : ${field.height}">
-                    <td th:each="width : ${field.width}"></td>
+                <tr style="height : 100px;" th:each="height, idx : ${fieldDetailDTO.get().getFieldLength().getHeight()}">
+                    <td th:each="width : ${fieldDetailDTO.get().getFieldLength().getWidth()}"></td>
                 </tr>
                 </tbody>
             </table>

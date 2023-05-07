@@ -54,7 +54,6 @@ public class FieldServiceImpl implements FieldService {
                         .tomatoes(tomatoes)
                         .fieldLength(o.getFieldLength())
                         .build());
-        boolean b = fieldDetailDTO.get().getFieldLength()[0][1];
         return fieldDetailDTO;
     }
 }
