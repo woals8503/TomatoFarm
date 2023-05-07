@@ -1,0 +1,14 @@
+.plant {
+    background-color: #4CAF50;
+  }
+
+  .ripe {
+    background-color: #FF5733;
+  }
+
+  table td {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+  }

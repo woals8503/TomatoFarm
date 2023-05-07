@@ -31,4 +31,5 @@ public class Item {
         if(stock < 0) throw new NotEnoughStockException();
         this.stockQuantity--;
     }
+
 }

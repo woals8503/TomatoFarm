@@ -13,10 +13,9 @@ public class Tomato {
     private Long id;
 
     private int level;
-
     private int listIndex;
-
     private int life;
+    private boolean existence;
 
     @Embedded
     private Pest pest;
