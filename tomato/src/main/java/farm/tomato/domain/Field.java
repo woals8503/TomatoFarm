@@ -19,6 +19,10 @@ public class Field {
     @Embedded
     private FieldLength fieldLength;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "field_id")
     private List<Tomato> tomatoes = new LinkedList<>();
