@@ -12,3 +12,7 @@
     text-align: center;
     vertical-align: middle;
   }
+
+  .field-pictures img:hover {
+        border: 5px solid #007BFF;
+      }

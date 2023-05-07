@@ -1,38 +1,41 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
-    <title>Hello</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Menu</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+    body {
+      background-color: #f5f5f5;
+    }
+    .menu-button {
+      margin-top: 50px;
+      margin-bottom: 20px;
+      font-size: 32px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .menu-button:hover {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .menu-button:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  </style>
 </head>
-
 <body>
-
 <div class="container">
-
-    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-
-    <div class="jumbotron">
-        <h1>HELLO SHOP</h1>
-        <p class="lead">회원 기능</p>
-        <p>
-            <a class="btn btn-lg btn-secondary" href="/members/new">회원 가입</a>
-            <a class="btn btn-lg btn-secondary" href="/members">회원 목록</a>
-        </p>
-        <p class="lead">상품 기능</p>
-        <p>
-            <a class="btn btn-lg btn-dark" href="/items/new">상품 등록</a>
-            <a class="btn btn-lg btn-dark" href="/items">상품 목록</a>
-        </p>
-        <p class="lead">주문 기능</p>
-        <p>
-            <a class="btn btn-lg btn-info" href="/order">상품 주문</a>
-            <a class="btn btn-lg btn-info" href="/orders">주문 내역</a>
-        </p>
-    </div>
-
-    <div th:replace="fragments/footer :: footer"/>
-
-</div> <!-- /container -->
-
+    <a href="/selectfield"><button class="btn btn-primary menu-button btn-block">내 농장</button></a>
+    <br>
+    <button class="btn btn-primary menu-button btn-block">상점</button>
+    <br>
+    <button class="btn btn-primary menu-button btn-block">게임 종료</button>
+</div>
 </body>
 </html>
