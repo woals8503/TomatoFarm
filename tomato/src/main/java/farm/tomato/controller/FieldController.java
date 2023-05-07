@@ -1,24 +1,35 @@
 package farm.tomato.controller;
 
-import farm.tomato.service.Impl.FieldServiceImpl;
+import farm.tomato.domain.Member;
+import farm.tomato.service.FieldService;
+import farm.tomato.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
 public class FieldController {
 
-    @Autowired
-    private FieldServiceImpl gameService;
+    private final FieldService fieldService;
+    private final MemberService memberService;
 
-    @GetMapping("/game/start")
-    public String start(Model model) {
-        gameService.createField();
-
+    @GetMapping("/fieldDetail")
+    public String fieldDetail(
+            @RequestParam(value = "id") Long fieldId,
+            Model model) {
+        fieldService.findFieldInfo(fieldId);
         return "field";
+    }
+
+    @GetMapping("/selectfield")
+    public String selectField(Model model) {
+        //1. 먼저 회원이 가지고있는 필드의 정보를 모두 불러온다.
+        Member member = memberService.findMember();
+        model.addAttribute("field", fieldService.findAllField());
+        return "selectfield";
     }
 
 }

@@ -1,5 +1,6 @@
 package farm.tomato.domain;
 
+import farm.tomato.domain.embedded.FieldLength;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,9 @@ public class Field {
     @Id @GeneratedValue
     @Column(name = "field_id")
     private Long id;
+
+    @Embedded
+    private FieldLength fieldLength;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "field_id")

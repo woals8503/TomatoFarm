@@ -1,21 +1,44 @@
 package farm.tomato.service.Impl;
 
-import farm.tomato.repository.Impl.FieldRepositoryImpl;
+import farm.tomato.domain.dto.FieldDetailDTO;
+import farm.tomato.domain.dto.FieldDTO;
+import farm.tomato.repository.FieldRepository;
 import farm.tomato.service.FieldService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class FieldServiceImpl implements FieldService {
 
     @Autowired
-    private FieldRepositoryImpl gameRepository;
+    private FieldRepository fieldRepository;
 
     @Override
-    public void createField() {
-        // 1. 먼저 필드를 생성해야한다
+    public void findFieldInfo(Long fieldId) {
 
+
+
+//        fieldRepository.findById(fieldId)
+//                .map(o -> FieldDetailDTO.builder()
+//                        .id(fieldId)
+//                        .tomatoes()
+//                );
+    }
+
+    @Override
+    public List<FieldDTO> findAllField() {
+        List<FieldDTO> fieldDto = fieldRepository.findAll().stream()
+                .map(o -> FieldDTO.builder()
+                        .id(o.getId())
+                        .name("밭" + o.getId()).build()
+                ).collect(Collectors.toList());
+        return fieldDto;
     }
 }

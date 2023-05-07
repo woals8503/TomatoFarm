@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Field Pictures</title>
+  <style>
+    .field-pictures {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .field-pictures img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 5px solid white;
+      box-shadow: 5px 5px 10px #CFCFCF;
+    }
+
+    .field-pictures img:hover {
+      border: 5px solid #007BFF;
+    }
+  </style>
+</head>
+<body>
+<div class="field-pictures">
+  <div th:each="field, idx : ${field}">
+    <h2 th:text="${field.getName()}"></h2>
+    <a href="@{/fieldDetail(id=${field.getId()})}"><img src="/img/field.PNG" alt="Field 1"></a>
+  </div>
+</div>
+</body>
+</html>
