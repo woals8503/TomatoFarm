@@ -30,7 +30,7 @@
 <div class="field-pictures">
   <div th:each="field, idx : ${field}">
     <h2 th:text="${field.getName()}"></h2>
-    <a href="@{/fieldDetail(id=${field.getId()})}"><img src="/img/field.PNG" alt="Field 1"></a>
+    <a th:href="@{/fieldDetail/{id} (id=${field.id})}"><img src="/img/field.PNG" alt="Field 1"></a>
   </div>
 </div>
 </body>

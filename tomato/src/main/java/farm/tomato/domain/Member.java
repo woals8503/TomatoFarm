@@ -23,8 +23,11 @@ public class Member {
     @JoinColumn(name = "member_id")
     List<Item> items = new ArrayList<>();
 
-    @OneToMany
-    @JoinColumn(name = "member_id")
+//    @OneToMany
+//    @JoinColumn(name = "member_id")
+//    private List<Field> fields =
+
+    @OneToMany(mappedBy = "member")
     private List<Field> fields = new ArrayList<>();
 
     public void createField(Field field) {

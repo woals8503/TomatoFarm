@@ -7,7 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -16,19 +19,20 @@ public class FieldController {
     private final FieldService fieldService;
     private final MemberService memberService;
 
-    @GetMapping("/fieldDetail")
+    @GetMapping("/fieldDetail/{id}")
     public String fieldDetail(
-            @RequestParam(value = "id") Long fieldId,
+            @PathVariable("id") Long fieldId,
             Model model) {
-        fieldService.findFieldInfo(fieldId);
+        model.addAttribute("field", fieldService.findFieldInfo(fieldId));
         return "field";
     }
 
     @GetMapping("/selectfield")
-    public String selectField(Model model) {
+    public String selectField(
+            Model model) {
         //1. 먼저 회원이 가지고있는 필드의 정보를 모두 불러온다.
-        Member member = memberService.findMember();
-        model.addAttribute("field", fieldService.findAllField());
+        Optional<Member> member = memberService.findMember();
+        model.addAttribute("field", fieldService.findAllField(member));
         return "selectfield";
     }
 

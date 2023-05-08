@@ -2,7 +2,9 @@ package farm.tomato.service;
 
 import farm.tomato.domain.Member;
 
+import java.util.Optional;
+
 public interface MemberService {
 
-    Member findMember();
+    Optional<Member> findMember();
 }

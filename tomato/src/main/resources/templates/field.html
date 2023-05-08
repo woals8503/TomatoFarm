@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Tomato Growing Game</title>
@@ -23,12 +23,8 @@
             <h1>Tomato Field</h1>
             <table class="table table-bordered table-hover">
                 <tbody>
-                <tr style="height : 100px;">
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
+                <tr style="height : 100px;" th:each="height, idx : ${fieldDetailDTO.get().getFieldLength().getHeight()}">
+                    <td th:each="width : ${fieldDetailDTO.get().getFieldLength().getWidth()}"></td>
                 </tr>
                 </tbody>
             </table>
