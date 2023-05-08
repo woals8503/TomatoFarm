@@ -1,12 +1,15 @@
 package farm.tomato.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tomato {
     @Id @GeneratedValue
     @Column(name = "tomato_id")
@@ -16,6 +19,7 @@ public class Tomato {
     private int listIndex;
     private int life;
     private boolean existence;
+    private String imagePath;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "field_id")

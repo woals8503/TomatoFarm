@@ -1,6 +1,5 @@
 package farm.tomato.domain.dto;
 
-import farm.tomato.domain.Tomato;
 import farm.tomato.domain.embedded.FieldLength;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,26 +14,43 @@ import java.util.List;
 @NoArgsConstructor
 public class FieldDetailDTO {
     private Long id;
-    private List<TomatoDTO> tomatoes;
-    private boolean[][] field;
+    private TomatoDTO[][] field;
     private FieldLength fieldLength;
+    private int x;
+    private int y;
 
     @Builder
     public FieldDetailDTO(Long id, List<TomatoDTO> tomatoes, FieldLength fieldLength) {
         this.id = id;
-        this.tomatoes = tomatoes;
         this.fieldLength = fieldLength;
-        this.field = new boolean[fieldLength.getHeight()][fieldLength.getWidth()];
-        //토마토는 3 15 번호 일때 값을 넣고 아니면
-        int index = 1;
-        //필드값 삽입
-        for(int i=0; i<fieldLength.getHeight(); i++) {
-            for(int j=0; j<fieldLength.getWidth(); j++) {
-                if(index == tomatoes.get(index-1).getListIndex())
-                    this.field[i][j] = true;
-                else this.field[i][j] = false;
-                index++;
+        x = fieldLength.getHeight();
+        y = fieldLength.getWidth();
+        this.field = new TomatoDTO[x+1][y];
+        insertTomatoIntoField(tomatoes);
+    }
+
+    private void insertTomatoIntoField(List<TomatoDTO> tomatoes) {
+        //토마토 배열 생성
+        for(int i=1; i<=x; i++) {
+            for(int j=0; j<y; j++) {
+                field[i][j] = new TomatoDTO("none.PNG");
             }
         }
+
+        /** 이부분 시간복잡도 개선 필요 **/
+        for (TomatoDTO tomato : tomatoes) {
+            // 인덱스 값이 주어진다.  ex ) 20
+            int listIndex = tomato.getListIndex();
+            int num = 1;
+            for(int i=1; i<=x; i++) {
+                for(int j=0; j<y; j++) {
+                    if(listIndex == num)
+                        field[i][j] = tomato;
+                    num++;
+                 }
+            }
+        }
+
     }
+
 }

@@ -13,6 +13,6 @@
     vertical-align: middle;
   }
 
-  .field-pictures img:hover {
-        border: 5px solid #007BFF;
-      }
+  .field-tomato td:hover {
+        border: solid #007BFF;
+  }
