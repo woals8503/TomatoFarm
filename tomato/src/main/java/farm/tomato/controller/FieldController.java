@@ -21,7 +21,7 @@ public class FieldController {
 
     @GetMapping("/fieldDetail/{id}")
     public String fieldDetail(
-            @PathVariable("fieldId") Long fieldId,
+            @PathVariable("id") Long fieldId,
             Model model) {
         model.addAttribute("field", fieldService.findFieldInfo(fieldId));
         return "field";

@@ -17,6 +17,10 @@ public class Tomato {
     private int life;
     private boolean existence;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "field_id")
+    private Field field;
+
     @Embedded
     private Pest pest;
 

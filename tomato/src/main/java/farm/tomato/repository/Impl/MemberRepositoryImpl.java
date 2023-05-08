@@ -5,4 +5,5 @@ import farm.tomato.repository.custom.MemberRepositoryCustom;
 
 public class MemberRepositoryImpl implements MemberRepositoryCustom {
 
+
 }

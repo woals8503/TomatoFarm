@@ -1,6 +1,7 @@
 package farm.tomato.service.Impl;
 
 import farm.tomato.domain.Member;
+import farm.tomato.domain.Tomato;
 import farm.tomato.domain.dto.FieldDTO;
 import farm.tomato.domain.dto.FieldDetailDTO;
 import farm.tomato.domain.dto.TomatoDTO;
@@ -23,6 +24,7 @@ public class FieldServiceImpl implements FieldService {
 
     @Autowired
     private FieldRepository fieldRepository;
+    @Autowired
     private TomatoRepository tomatoRepository;
 
     @Override
@@ -38,6 +40,9 @@ public class FieldServiceImpl implements FieldService {
     @Override
     public Optional<FieldDetailDTO> findFieldInfo(Long fieldId) {
         // 모든 토마토 조회
+
+        List<Tomato> tomatoes1 = tomatoRepository.findAllTomato(fieldId);
+
         List<TomatoDTO> tomatoes = tomatoRepository.findAll().stream()
                 .map(o -> TomatoDTO.builder()
                         .id(o.getId())
