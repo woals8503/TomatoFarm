@@ -11,5 +11,5 @@ public interface FieldService {
 
     List<FieldDTO> findAllField(Optional<Member> member);
 
-    Optional<FieldDetailDTO> findFieldInfo(Long fieldId);
+    FieldDetailDTO findFieldInfo(Long fieldId);
 }

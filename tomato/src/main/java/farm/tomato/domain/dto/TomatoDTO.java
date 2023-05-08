@@ -12,13 +12,19 @@ public class TomatoDTO {
     private int listIndex;
     private int life;
     private boolean existence;
+    private String imagePath;
+
+    public TomatoDTO(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     @Builder
-    public TomatoDTO(Long id, int level, int listIndex, int life, boolean existence) {
+    public TomatoDTO(Long id, int level, int listIndex, int life, boolean existence, String imagePath) {
         this.id = id;
         this.level = level;
         this.listIndex = listIndex;
         this.life = life;
         this.existence = existence;
+        this.imagePath = imagePath;
     }
 }

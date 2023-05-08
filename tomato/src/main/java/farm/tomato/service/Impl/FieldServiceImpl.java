@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,27 +39,28 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
-    public Optional<FieldDetailDTO> findFieldInfo(Long fieldId) {
+    public FieldDetailDTO findFieldInfo(Long fieldId) {
         // 모든 토마토 조회
 
-        List<Tomato> tomatoes1 = tomatoRepository.findAllTomato(fieldId);
-
-        List<TomatoDTO> tomatoes = tomatoRepository.findAll().stream()
+        List<TomatoDTO> tomatoes = tomatoRepository.findAllTomato(fieldId).stream()
                 .map(o -> TomatoDTO.builder()
                         .id(o.getId())
                         .level(o.getLevel())
                         .listIndex(o.getListIndex())
                         .life(o.getLife())
                         .existence(o.isExistence())
+                        .imagePath(o.getImagePath())
                         .build()
                 ).collect(Collectors.toList());
 
-        Optional<FieldDetailDTO> fieldDetailDTO = fieldRepository.findById(fieldId)
+
+        FieldDetailDTO field = fieldRepository.findById(fieldId)
                 .map(o -> FieldDetailDTO.builder()
                         .id(fieldId)
                         .tomatoes(tomatoes)
                         .fieldLength(o.getFieldLength())
-                        .build());
-        return fieldDetailDTO;
+                        .build()).get();
+
+        return field;
     }
 }

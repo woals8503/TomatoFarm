@@ -6,7 +6,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/field.css">
+    <link rel="stylesheet" href="/css/field.css">
+    <style>
+		table, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			padding: 10px;
+		}
+	</style>
 </head>
 <body>
 <div class="container">
@@ -21,11 +28,15 @@
         <!-- Tomato field -->
         <div class="col-sm-10 bg-white p-4">
             <h1>Tomato Field</h1>
-            <table class="table table-bordered table-hover">
-                <tbody>
-                <tr style="height : 100px;" th:each="height, idx : ${fieldDetailDTO.get().getFieldLength().getHeight()}">
-                    <td th:each="width : ${fieldDetailDTO.get().getFieldLength().getWidth()}"></td>
-                </tr>
+            <table class="table table-bordered">
+                <tbody th:class="field-tomato">
+                    <tr style="height : 100px;" th:each="x : ${#numbers.sequence(1, field.getX())}">
+                        <div th:each="y : ${#numbers.sequence(0, field.getY()-1)}">
+                            <td>
+                                <img th:src="'/img/' + ${field.getField()[x][y].imagePath}">
+                            </td>
+                        </div>
+                    </tr>
                 </tbody>
             </table>
         </div>

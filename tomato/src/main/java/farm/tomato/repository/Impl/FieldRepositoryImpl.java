@@ -3,6 +3,7 @@ package farm.tomato.repository.Impl;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import farm.tomato.domain.Field;
 import farm.tomato.domain.Member;
+import farm.tomato.domain.QField;
 import farm.tomato.repository.custom.FieldRepositoryCustom;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static farm.tomato.domain.QField.*;
+
 
 @Repository
 public class FieldRepositoryImpl implements FieldRepositoryCustom {
