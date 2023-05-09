@@ -31,26 +31,12 @@ public class FieldDetailDTO {
 
     private void insertTomatoIntoField(List<TomatoDTO> tomatoes) {
         //토마토 배열 생성
+        int num = 0;
         for(int i=1; i<=x; i++) {
             for(int j=0; j<y; j++) {
-                field[i][j] = new TomatoDTO("none.PNG");
+                field[i][j] = tomatoes.get(num);
+                num++;
             }
         }
-
-        /** 이부분 시간복잡도 개선 필요 **/
-        for (TomatoDTO tomato : tomatoes) {
-            // 인덱스 값이 주어진다.  ex ) 20
-            int listIndex = tomato.getListIndex();
-            int num = 1;
-            for(int i=1; i<=x; i++) {
-                for(int j=0; j<y; j++) {
-                    if(listIndex == num)
-                        field[i][j] = tomato;
-                    num++;
-                 }
-            }
-        }
-
     }
-
 }

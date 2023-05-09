@@ -26,6 +26,8 @@ public class Field {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "field")
     private List<Tomato> tomatoes = new LinkedList<>();
 
+
+
     public void plantSeed(Tomato tomato) {
         tomatoes.add(tomato);
     }

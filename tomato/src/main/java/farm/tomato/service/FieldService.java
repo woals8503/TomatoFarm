@@ -12,4 +12,6 @@ public interface FieldService {
     List<FieldDTO> findAllField(Optional<Member> member);
 
     FieldDetailDTO findFieldInfo(Long fieldId);
+
+    void createField();
 }

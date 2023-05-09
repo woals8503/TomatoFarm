@@ -35,4 +35,10 @@ public class FieldController {
         return "selectfield";
     }
 
+    @GetMapping("/field/create")
+    public String createField() {
+        fieldService.createField();
+        return "redirect:/selectfield";
+    }
+
 }

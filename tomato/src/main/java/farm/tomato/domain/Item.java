@@ -1,4 +1,4 @@
-package farm.tomato.domain.item;
+package farm.tomato.domain;
 
 import farm.tomato.domain.Member;
 import farm.tomato.exception.NotEnoughStockException;

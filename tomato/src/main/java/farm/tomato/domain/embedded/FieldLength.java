@@ -9,8 +9,12 @@ import javax.persistence.Embeddable;
 @Embeddable
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class FieldLength {
     private int width;
     private int height;
+
+    public FieldLength(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
 }

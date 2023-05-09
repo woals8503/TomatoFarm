@@ -1,11 +1,14 @@
 package farm.tomato.service.Impl;
 
+import farm.tomato.domain.Field;
 import farm.tomato.domain.Member;
 import farm.tomato.domain.Tomato;
 import farm.tomato.domain.dto.FieldDTO;
 import farm.tomato.domain.dto.FieldDetailDTO;
 import farm.tomato.domain.dto.TomatoDTO;
+import farm.tomato.domain.embedded.FieldLength;
 import farm.tomato.repository.FieldRepository;
+import farm.tomato.repository.MemberRepository;
 import farm.tomato.repository.TomatoRepository;
 import farm.tomato.service.FieldService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,6 +30,8 @@ public class FieldServiceImpl implements FieldService {
     private FieldRepository fieldRepository;
     @Autowired
     private TomatoRepository tomatoRepository;
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
     public List<FieldDTO> findAllField(Optional<Member> member) {
@@ -60,7 +65,34 @@ public class FieldServiceImpl implements FieldService {
                         .tomatoes(tomatoes)
                         .fieldLength(o.getFieldLength())
                         .build()).get();
-
         return field;
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public void createField() {
+        Member member = memberRepository.findById(1l).get();
+        FieldLength fieldLength = new FieldLength(5, 5);
+
+        Field field = new Field();
+        field.setFieldLength(fieldLength);
+        field.setMember(member);
+
+        int num = 1;
+
+        List<Tomato> tomatoes = new LinkedList<>();
+
+        //토마토 생성
+        for(int i=1; i<=fieldLength.getHeight(); i++) {
+            for(int j=0; j<fieldLength.getWidth(); j++) {
+                Tomato tomato = new Tomato(1, num, 3, false, "none.PNG", field);
+                tomatoes.add(tomato);
+                num++;
+            }
+        }
+
+        field.setTomatoes(tomatoes);
+        fieldRepository.save(field);
+
     }
 }

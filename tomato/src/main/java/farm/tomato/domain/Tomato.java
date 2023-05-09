@@ -1,9 +1,6 @@
 package farm.tomato.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -25,19 +22,37 @@ public class Tomato {
     @JoinColumn(name = "field_id")
     private Field field;
 
-    @Embedded
-    private Pest pest;
-
-    public Tomato(int level, int listIndex, int life) {
+    @Builder
+    public Tomato(int level, int listIndex, int life, boolean existence, String imagePath, Field field) {
         this.level = level;
         this.listIndex = listIndex;
         this.life = life;
+        this.existence = existence;
+        this.imagePath = imagePath;
+        this.field = field;
     }
 
     public void levelUp() {
-        if(this.level < 3)
-            this.level++;
-        else return;
+        if(this.level < 3 && this.existence == true){
+            this.level += 1;
+           if(this.level == 2)
+               this.imagePath = "smalltomato.PNG";
+           else if(this.level == 3)
+               this.imagePath = "tomato.PNG";
+        }
     }
 
+    public void plant() {
+        this.imagePath = "seed.PNG";
+        this.existence = true;
+    }
+
+
+    public void harvest() {
+        System.out.println("왔다!");
+        this.level = 1;
+        this.life = 3;
+        this.existence = false;
+        this.imagePath = "none.PNG";
+    }
 }
