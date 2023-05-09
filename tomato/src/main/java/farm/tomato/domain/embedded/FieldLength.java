@@ -1,6 +1,5 @@
 package farm.tomato.domain.embedded;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

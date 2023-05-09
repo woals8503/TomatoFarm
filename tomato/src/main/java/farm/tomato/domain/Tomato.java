@@ -1,12 +1,21 @@
 package farm.tomato.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 
+import java.util.SplittableRandom;
+
+import static javax.persistence.CascadeType.*;
+import static javax.persistence.FetchType.*;
+import static lombok.AccessLevel.*;
+
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = PROTECTED)
 public class Tomato {
     @Id @GeneratedValue
     @Column(name = "tomato_id")
@@ -18,21 +27,26 @@ public class Tomato {
     private boolean existence;
     private String imagePath;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "field_id")
     private Field field;
 
+    @OneToOne(cascade = ALL, fetch = LAZY)
+    @JoinColumn(name = "pest_id")
+    private Pest pest;
+
     @Builder
-    public Tomato(int level, int listIndex, int life, boolean existence, String imagePath, Field field) {
+    public Tomato(int level, int listIndex, int life, boolean existence, String imagePath, Field field, Pest pest) {
         this.level = level;
         this.listIndex = listIndex;
         this.life = life;
         this.existence = existence;
         this.imagePath = imagePath;
         this.field = field;
+        this.pest = pest;
     }
 
-    public void levelUp() {
+    public int levelUp() {
         if(this.level < 3 && this.existence == true){
             this.level += 1;
            if(this.level == 2)
@@ -40,6 +54,8 @@ public class Tomato {
            else if(this.level == 3)
                this.imagePath = "tomato.PNG";
         }
+
+        return this.level;
     }
 
     public void plant() {
@@ -56,5 +72,16 @@ public class Tomato {
         this.life = 3;
         this.existence = false;
         this.imagePath = "none.PNG";
+    }
+
+    public boolean pestCreateOrNot(Pest pest) {
+        SplittableRandom random = new SplittableRandom();
+        boolean result = random.nextInt(1, pest.getPercentage()) <= 50;
+        return result;
+    }
+
+    public void addPest(Pest pest) {
+        this.pest = pest;
+        this.imagePath = pest.getImagePath();
     }
 }

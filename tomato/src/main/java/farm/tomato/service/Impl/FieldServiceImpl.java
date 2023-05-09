@@ -1,7 +1,9 @@
 package farm.tomato.service.Impl;
 
+import com.querydsl.core.Tuple;
 import farm.tomato.domain.Field;
 import farm.tomato.domain.Member;
+import farm.tomato.domain.Pest;
 import farm.tomato.domain.Tomato;
 import farm.tomato.domain.dto.FieldDTO;
 import farm.tomato.domain.dto.FieldDetailDTO;
@@ -47,7 +49,8 @@ public class FieldServiceImpl implements FieldService {
     public FieldDetailDTO findFieldInfo(Long fieldId) {
         // 모든 토마토 조회
 
-        List<TomatoDTO> tomatoes = tomatoRepository.findAllTomato(fieldId).stream()
+        List<TomatoDTO> tomatoes = tomatoRepository.findAllTomato(fieldId)
+                .stream()
                 .map(o -> TomatoDTO.builder()
                         .id(o.getId())
                         .level(o.getLevel())
@@ -55,6 +58,7 @@ public class FieldServiceImpl implements FieldService {
                         .life(o.getLife())
                         .existence(o.isExistence())
                         .imagePath(o.getImagePath())
+                        .pest(o.getPest())
                         .build()
                 ).collect(Collectors.toList());
 
@@ -73,11 +77,9 @@ public class FieldServiceImpl implements FieldService {
     public void createField() {
         Member member = memberRepository.findById(1l).get();
         FieldLength fieldLength = new FieldLength(5, 5);
-
         Field field = new Field();
         field.setFieldLength(fieldLength);
         field.setMember(member);
-
         int num = 1;
 
         List<Tomato> tomatoes = new LinkedList<>();
@@ -85,14 +87,13 @@ public class FieldServiceImpl implements FieldService {
         //토마토 생성
         for(int i=1; i<=fieldLength.getHeight(); i++) {
             for(int j=0; j<fieldLength.getWidth(); j++) {
-                Tomato tomato = new Tomato(1, num, 3, false, "none.PNG", field);
+                Pest pest = new Pest(1, false, 101, "pest.PNG");
+                Tomato tomato = new Tomato(1, num, 3, false, "none.PNG", field, pest);
                 tomatoes.add(tomato);
                 num++;
             }
         }
-
         field.setTomatoes(tomatoes);
         fieldRepository.save(field);
-
     }
 }
