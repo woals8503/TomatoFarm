@@ -34,8 +34,8 @@ public class FieldServiceImpl implements FieldService {
     private MemberRepository memberRepository;
 
     @Override
-    public List<FieldDTO> findAllField(Optional<Member> member) {
-        List<FieldDTO> fieldDto = fieldRepository.findField(member).stream()
+    public List<FieldDTO> findAllField(Long memberId) {
+        List<FieldDTO> fieldDto = fieldRepository.findField(memberId).stream()
                 .map(o -> FieldDTO.builder()
                         .id(o.getId())
                         .name("밭" + o.getId()).build()

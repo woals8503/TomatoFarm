@@ -20,13 +20,11 @@ public class TomatoServiceImpl implements TomatoService {
 
     @Override
     @Transactional(readOnly = false)
-    public String createTomato(Long tomatoId) {
+    public void createTomato(Long tomatoId) {
         Tomato tomato = tomatoRepository.findById(tomatoId).get();
         //더티체킹
         if(!tomato.isExistence())
             tomato.plant();
-
-        return null;
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface FieldService {
 
-    List<FieldDTO> findAllField(Optional<Member> member);
+    List<FieldDTO> findAllField(Long memberId);
 
     FieldDetailDTO findFieldInfo(Long fieldId);
 

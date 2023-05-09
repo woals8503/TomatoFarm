@@ -34,11 +34,10 @@
 
     <div class="header">
         <h1>My Items</h1>
-        <p>
-            <span class="item-count">농약 : 0</span>
-            <span class="item-count">토마토 : 0</span>
-            <span class="item-count">해충 박멸 : 0</span>
-        </p>
+        <div class="item-count" th:text="'토마토 : ' + ${member.amount}"/>
+        <div th:each="item, idx : ${member.getMyItemList()}">
+            <span class="item-count" th:text="${item.getName()} + ${item.getQuantity()}"/>
+        </div>
     </div>
 
     <div class="row">

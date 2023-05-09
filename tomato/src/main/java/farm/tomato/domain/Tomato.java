@@ -49,7 +49,9 @@ public class Tomato {
 
 
     public void harvest() {
-        System.out.println("왔다!");
+        if(this.level != 3) {
+            throw new IllegalStateException("3레벨 토마토만 수확 가능합니다.");
+        }
         this.level = 1;
         this.life = 3;
         this.existence = false;

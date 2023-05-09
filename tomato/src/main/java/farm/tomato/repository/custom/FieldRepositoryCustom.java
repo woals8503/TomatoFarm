@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface FieldRepositoryCustom {
 
-    List<Field> findField(Optional<Member> member);
+    List<Field> findField(Long memberId);
 }

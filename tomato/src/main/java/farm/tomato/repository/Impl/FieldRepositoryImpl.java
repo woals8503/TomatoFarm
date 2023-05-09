@@ -24,8 +24,8 @@ public class FieldRepositoryImpl implements FieldRepositoryCustom {
     }
 
     @Override
-    public List<Field> findField(Optional<Member> member) {
+    public List<Field> findField(Long memberId) {
         return queryFactory.selectFrom(field)
-                .where(field.member.id.eq(member.get().getId())).fetch();
+                .where(field.member.id.eq(memberId)).fetch();
     }
 }

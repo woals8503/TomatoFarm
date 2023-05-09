@@ -2,7 +2,7 @@ package farm.tomato.service;
 
 public interface TomatoService {
 
-    String createTomato(Long tomatoId);
+    void createTomato(Long tomatoId);
 
     void water(Long tomatoId);
 
