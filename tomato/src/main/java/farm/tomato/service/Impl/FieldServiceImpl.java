@@ -11,6 +11,7 @@ import farm.tomato.domain.dto.TomatoDTO;
 import farm.tomato.domain.embedded.FieldLength;
 import farm.tomato.repository.FieldRepository;
 import farm.tomato.repository.MemberRepository;
+import farm.tomato.repository.PestRepository;
 import farm.tomato.repository.TomatoRepository;
 import farm.tomato.service.FieldService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -29,11 +31,13 @@ import java.util.stream.Collectors;
 public class FieldServiceImpl implements FieldService {
 
     @Autowired
-    private FieldRepository fieldRepository;
+    private final FieldRepository fieldRepository;
     @Autowired
-    private TomatoRepository tomatoRepository;
+    private final TomatoRepository tomatoRepository;
     @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
+    @Autowired
+    private final PestRepository pestRepository;
 
     @Override
     public List<FieldDTO> findAllField(Long memberId) {
@@ -73,8 +77,9 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public void createField() {
+        //다중 insert문제. 이유 -> save로 Transacional를 두번 하기 때문이다.
         Member member = memberRepository.findById(1l).get();
         FieldLength fieldLength = new FieldLength(5, 5);
         Field field = new Field();

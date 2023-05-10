@@ -9,11 +9,8 @@ import farm.tomato.repository.PestRepository;
 import farm.tomato.repository.TomatoRepository;
 import farm.tomato.service.TomatoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.util.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.SplittableRandom;
 
 @Service
 @Transactional(readOnly = true)

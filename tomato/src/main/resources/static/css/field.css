@@ -16,3 +16,23 @@
   .field-tomato td:hover {
         border: solid #007BFF;
   }
+
+    table, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+    }
+
+    .cursorImg {
+        pointer-events: none;
+    }
+
+    .header {
+      background-color: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .item-count {
+      font-weight: bold;
+    }

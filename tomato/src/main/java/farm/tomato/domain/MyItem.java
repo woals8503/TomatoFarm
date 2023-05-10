@@ -21,4 +21,9 @@ public class MyItem {
     private String name;
     private int quantity;
 
+    public void checkQuantity() {
+        if(this.quantity <= 0)
+            throw new IllegalStateException("수량이 부족합니다.");
+        this.quantity -= 1;
+    }
 }

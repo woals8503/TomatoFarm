@@ -1,13 +1,11 @@
 package farm.tomato.repository.Impl;
 
-import com.querydsl.core.Tuple;
+
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import farm.tomato.domain.QField;
-import farm.tomato.domain.QPest;
-import farm.tomato.domain.QTomato;
+
 import farm.tomato.domain.Tomato;
-import farm.tomato.domain.dto.QTomatoDTO;
-import farm.tomato.domain.dto.TomatoDTO;
+import farm.tomato.domain.dto.PestTureTomatoDTO;
+import farm.tomato.domain.dto.QPestTureTomatoDTO;
 import farm.tomato.repository.custom.TomatoRepositoryCustom;
 import org.springframework.stereotype.Repository;
 
@@ -37,4 +35,18 @@ public class TomatoRepositoryImpl implements TomatoRepositoryCustom {
                 .fetch();
 
     }
+
+    @Override
+    public List<PestTureTomatoDTO> findPestTomato(Long fieldId) {
+        return queryFactory
+                .select(new QPestTureTomatoDTO(tomato, pest))
+                .from(tomato)
+                .innerJoin(pest)
+                .on(tomato.pest.id.eq(pest.id))
+                .where(tomato.field.id.eq(fieldId)
+                        .and(pest.existence.eq(true))
+                )
+                .fetch();
+    }
+
 }

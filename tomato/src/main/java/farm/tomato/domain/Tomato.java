@@ -1,12 +1,10 @@
 package farm.tomato.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 
+import java.util.List;
 import java.util.SplittableRandom;
 
 import static javax.persistence.CascadeType.*;
@@ -47,7 +45,8 @@ public class Tomato {
     }
 
     public int levelUp() {
-        if(this.level < 3 && this.existence == true){
+
+        if(this.level < 3 && this.existence == true && !pest.isExistence()){
             this.level += 1;
            if(this.level == 2)
                this.imagePath = "smalltomato.PNG";
