@@ -1,6 +1,5 @@
 package farm.tomato.domain;
 
-import farm.tomato.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,13 +18,17 @@ public class Member {
     private int gold;
     private int amount;
 
-    @OneToMany
-    @JoinColumn(name = "member_id")
-    List<Item> items = new ArrayList<>();
+//    @OneToMany
+//    @JoinColumn(name = "member_id")
+//    List<Item> items = new ArrayList<>();
 
 //    @OneToMany
 //    @JoinColumn(name = "member_id")
 //    private List<Field> fields =
+
+    @OneToMany
+    @JoinColumn(name = "member_id")
+    private List<MyItem> myItems = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Field> fields = new ArrayList<>();
@@ -34,8 +37,8 @@ public class Member {
         fields.add(field);
     }
 
-    public void createItem(Item item) {
-        items.add(item);
+    public void addAmount() {
+        this.amount += 1;
     }
 
 }

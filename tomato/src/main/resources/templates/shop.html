@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Game Item Shop</title>
+  <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
+<h1>Game Item Shop</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Item Name</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="item, idx : ${item}">
+    <td th:text="${item.name}"></td>
+    <td th:text="${item.price} + '원'"></td>
+    <td class="quantity">
+      <div class="input-group input-number-group">
+        <div class="input-group-button">
+          <span class="input-number-decrement">-</span>
+        </div>
+        <input class="input-number" type="number" value="1" min="0" max="1000">
+        <div class="input-group-button">
+          <span class="input-number-increment">+</span>
+        </div>
+      </div>
+    </td>
+    <td><button class="buy-button">Buy</button></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+  $('.input-number-increment').click(function() {
+    var $input = $(this).parents('.input-number-group').find('.input-number');
+    var val = parseInt($input.val(), 10);
+    $input.val(val + 1);
+  });
+
+  $('.input-number-decrement').click(function() {
+    var $input = $(this).parents('.input-number-group').find('.input-number');
+    var val = parseInt($input.val(), 10);
+    $input.val(val - 1);
+  });
+
+</script>
+</html>

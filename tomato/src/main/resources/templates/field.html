@@ -7,42 +7,187 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/field.css">
-    <style>
-		table, td {
-			border: 1px solid black;
-			border-collapse: collapse;
-			padding: 10px;
-		}
-	</style>
 </head>
 <body>
 <div class="container">
+    <div class="header">
+        <h1>My Items</h1>
+        <div class="item-count" th:text="'토마토 : ' + ${member.amount}"/>
+        <div th:each="item, idx : ${member.getMyItemList()}">
+            <span class="item-count" th:text="${item.getName()} + ' : ' + ${item.getQuantity()}"/>
+        </div>
+    </div>
+
     <div class="row">
         <!-- Game menu -->
         <div class="col-sm-2 d-flex flex-column bg-light p-3">
             <h2>Menu</h2>
-            <button class="btn btn-primary my-2">Plant Tomatoes</button>
-            <button class="btn btn-primary my-2">Water Tomatoes</button>
-            <button class="btn btn-primary my-2">Harvest Tomatoes</button>
+            <button class="btn btn-primary my-2 item" th:onclick="seed('seed')">토마토 심기</button>
+            <button class="btn btn-primary my-2 item" th:onclick="seed('water')">물 주기</button>
+            <button class="btn btn-primary my-2" th:onclick="pesticide([[${field.id}]], [[${member.getMyItemList().get(0).id}]]);">농약 사용</button>
+            <button class="btn btn-primary my-2 item" th:onclick="seed('harvest')">수확</button>
+            <button class="btn btn-primary my-2" th:onclick="exterminate([[${field.id}]], [[${member.getMyItemList().get(1).id}]])">해충 박멸</button>
         </div>
         <!-- Tomato field -->
-        <div class="col-sm-10 bg-white p-4">
+        <div class="col-sm-10 bg-white p-4" id="hiList">
             <h1>Tomato Field</h1>
             <table class="table table-bordered">
                 <tbody th:class="field-tomato">
+
                     <tr style="height : 100px;" th:each="x : ${#numbers.sequence(1, field.getX())}">
+
                         <div th:each="y : ${#numbers.sequence(0, field.getY()-1)}">
                             <td>
-                                <img th:src="'/img/' + ${field.getField()[x][y].imagePath}">
+                                <img th:src="'/img/' + ${field.getField()[x][y].imagePath}"
+                                     th:onclick="useItem([[${field.getField()[x][y].id}]], [[${field.id}]]);">
                             </td>
                         </div>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <div id="seedImg" class="cursorImg" style="position: absolute; display: none;">
+            <img src="/img/seed.PNG" width="80px" height="80px">
+        </div>
+
+        <div id="waterImg" class="cursorImg" style="position: absolute; display: none;">
+            <img src="/img/water.PNG" width="80px" height="80px">
+        </div>
+
+        <div id="harvestImg" class="cursorImg" style="position: absolute; display: none;">
+            <img src="/img/harvest.PNG" width="80px" height="80px">
+        </div>
     </div>
 </div>
 <!-- Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+    var flag = false;
+    var name = '';
+
+	function makeCursor(itemName) {
+		document.onmousemove = function(e) {
+			var div = document.getElementById(itemName);
+			div.style.left = event.clientX + "px"; // 단위 "px"를 꼭 붙여야 함
+			div.style.top = event.clientY + "px";
+		}
+	}
+
+	function useItem(tomatoId, fieldId) {
+	    if(flag == true) {
+	        if(name == "seed") {
+                $.ajax({
+                    type : "POST",
+                    url : "/tomato/plant",
+                    data : {
+                        "tomatoId" : tomatoId,
+                        "fieldId"  : fieldId
+                    },
+                    success : function(result) {
+                        console.log(result);
+                        location.href = "/fieldDetail/" + result;
+                    }
+                });
+	        }
+	        else if(name == "water") {
+	            $.ajax({
+                    type : "POST",
+                    url : "/tomato/water",
+                    data : {
+                        "tomatoId" : tomatoId,
+                        "fieldId"  : fieldId
+                    },
+                    success : function(result) {
+                        console.log(result);
+                        location.href = "/fieldDetail/" + result;
+                    }
+                });
+	        }
+	        else if(name == "harvest") {
+	             $.ajax({
+                    type : "POST",
+                    url : "/tomato/harvest",
+                    data : {
+                        "tomatoId" : tomatoId,
+                        "fieldId"  : fieldId
+                    },
+                    success : function(result) {
+                        console.log(result);
+                        location.href = "/fieldDetail/" + result;
+                    }
+                });
+	        }
+
+	    }
+	}
+
+	function seed(itemName) {
+
+        if(flag == false) {
+            if(itemName == "seed") {
+                var img = document.getElementById("seedImg");
+                img.style.display = "block";
+                flag = true;
+                name = itemName;
+                makeCursor('seedImg');
+            }
+            else if(itemName == "water") {
+                var img = document.getElementById("waterImg");
+                img.style.display = "block";
+                flag = true;
+                name = itemName;
+                makeCursor('waterImg');
+            }
+            else if(itemName == "harvest") {
+                var img = document.getElementById("harvestImg");
+                img.style.display = "block";
+                flag = true;
+                name = itemName;
+                makeCursor('harvestImg');
+            }
+        }
+        else {
+            flag = false;
+            name = '';
+            var cursor = document.getElementsByClassName("cursorImg");
+            for(let i=0; i<cursor.length; i++) {
+                cursor.item(i).style.display = "none";
+            }
+        }
+	}
+
+    function pesticide(fieldId, itemId) {
+         $.ajax({
+            type : "POST",
+            url : "/item/pesticide",
+            data : {
+                "fieldId"  : fieldId,
+                "itemId"  : itemId
+            },
+            success : function(result) {
+                alert("해충 생성 확률이 감소하였습니다.");
+                location.href = "/fieldDetail/" + result;
+            }
+        });
+    }
+
+    function exterminate(fieldId, itemId) {
+        $.ajax({
+            type : "POST",
+            url : "/item/exterminate",
+            data : {
+                "fieldId"  : fieldId,
+                "itemId"  : itemId
+            },
+            success : function(result) {
+                alert("모든 해충이 제거되었습니다.");
+                location.href = "/fieldDetail/" + result;
+            }
+        });
+    }
+</script>
 </body>
 </html>
