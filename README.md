@@ -52,6 +52,6 @@
 
 ### 1. 도메인
 <p align="center">
-  <img src="">
+  <img src="./readme_assets/domain.PNG">
 <p>
 <br>
