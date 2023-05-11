@@ -92,5 +92,6 @@
 <p align="center">
   <img src="./Readme_Assets/해충박멸전.PNG">
   <img src="./Readme_Assets/해충박멸 사용.PNG">
+   <img src="./Readme_Assets/removePest.PNG">
 <p>
 <br>
