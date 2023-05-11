@@ -50,15 +50,51 @@
 <br><br>
 
 
-### 1. 도메인
+### 1. 밭 생성
 <p align="center">
   <img src="./Readme_Assets/makefield.PNG">
-  <img src="./Readme_Assets/plantSeed.PNG">
-  <img src="./Readme_Assets/water.PNG">
-  <img src="./Readme_Assets/pest.PNG">
-  <img src="./Readme_Assets/pestside.PNG">
-  <img src="./Readme_Assets/plant.PNG">
+<p>
+<br>
+  
+  
+  
+  
   <img src="./Readme_Assets/해충박멸전.PNG">
-  <img src="./Readme_Assets/해충박멸사용.PNG">
+  <img src="./Readme_Assets/해충박멸 사용.PNG">
+  
+### 2. 씨앗 심기
+<p align="center">
+  <img src="./Readme_Assets/plantSeed.PNG">
+<p>
+<br>
+  
+### 3. 물 주기
+<p align="center">
+  <img src="./Readme_Assets/water.PNG">
+<p>
+<br>
+
+### 4. 해충 생성 
+<p align="center">
+  <img src="./Readme_Assets/pest.PNG">
+<p>
+<br>
+  
+  ### 5. 농약 사용 
+<p align="center">
+ <img src="./Readme_Assets/pestside.PNG">
+<p>
+<br>
+  
+### 6. 토마토 수확
+<p align="center">
+ <img src="./Readme_Assets/plant.PNG">
+<p>
+<br>
+  
+### 7. 해충 박멸
+<p align="center">
+  <img src="./Readme_Assets/해충박멸전.PNG">
+  <img src="./Readme_Assets/해충박멸 사용.PNG">
 <p>
 <br>
