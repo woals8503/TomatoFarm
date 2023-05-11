@@ -50,6 +50,14 @@
 <br><br>
 
 
+### 도메인 설계
+<p align="center">
+  <img src="./Readme_Assets/domain.PNG">
+<p>
+<br>
+<br>
+  
+
 ### 1. 밭 생성
 <p align="center">
   <img src="./Readme_Assets/makefield.PNG">
