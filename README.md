@@ -52,6 +52,13 @@
 
 ### 1. 도메인
 <p align="center">
-  <img src="./readme_assets/domain.PNG">
+  <img src="./Readme_Assets/makefield.PNG">
+  <img src="./Readme_Assets/plantSeed.PNG">
+  <img src="./Readme_Assets/water.PNG">
+  <img src="./Readme_Assets/pest.PNG">
+  <img src="./Readme_Assets/pestside.PNG">
+  <img src="./Readme_Assets/plant.PNG">
+  <img src="./Readme_Assets/해충박멸전.PNG">
+  <img src="./Readme_Assets/해충박멸사용.PNG">
 <p>
 <br>
