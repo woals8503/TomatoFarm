@@ -55,12 +55,7 @@
   <img src="./Readme_Assets/makefield.PNG">
 <p>
 <br>
-  
-  
-  
-  
-  <img src="./Readme_Assets/해충박멸전.PNG">
-  <img src="./Readme_Assets/해충박멸 사용.PNG">
+<br>
   
 ### 2. 씨앗 심기
 <p align="center">
@@ -73,25 +68,26 @@
   <img src="./Readme_Assets/water.PNG">
 <p>
 <br>
+<br>  
 
 ### 4. 해충 생성 
 <p align="center">
   <img src="./Readme_Assets/pest.PNG">
 <p>
 <br>
-  
+<br>  
   ### 5. 농약 사용 
 <p align="center">
  <img src="./Readme_Assets/pestside.PNG">
 <p>
 <br>
-  
+<br>  
 ### 6. 토마토 수확
 <p align="center">
  <img src="./Readme_Assets/plant.PNG">
 <p>
 <br>
-  
+<br>  
 ### 7. 해충 박멸
 <p align="center">
   <img src="./Readme_Assets/해충박멸전.PNG">
