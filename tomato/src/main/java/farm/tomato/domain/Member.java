@@ -22,10 +22,6 @@ public class Member {
 //    @JoinColumn(name = "member_id")
 //    List<Item> items = new ArrayList<>();
 
-//    @OneToMany
-//    @JoinColumn(name = "member_id")
-//    private List<Field> fields =
-
     @OneToMany
     @JoinColumn(name = "member_id")
     private List<MyItem> myItems = new ArrayList<>();
