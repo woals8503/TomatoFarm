@@ -36,7 +36,6 @@ public class Member {
     public void createField(Field field) {
         fields.add(field);
     }
-
     public void addAmount() {
         this.amount += 1;
     }
