@@ -28,7 +28,6 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Field> fields = new ArrayList<>();
-
     public void createField(Field field) {
         fields.add(field);
     }
